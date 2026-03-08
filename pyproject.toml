@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "py-cove"
+version = "0.1.0"
+description = "Python SDK for the Cove REST API"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.27.0",
+    "pydantic>=2.0.0",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Homepage = "https://github.com/lyubolp/py-cove"
+Repository = "https://github.com/lyubolp/py-cove"
+Issues = "https://github.com/lyubolp/py-cove/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["cove_sdk"]
