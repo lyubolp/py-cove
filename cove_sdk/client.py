@@ -1,8 +1,10 @@
 from cove_sdk._http import HTTPClient
 from cove_sdk.models import Token
 from cove_sdk.resources.api_keys import APIKeysClient
+from cove_sdk.resources.json_items import JSONItemsClient
 from cove_sdk.resources.key_values import KeyValuesClient
 from cove_sdk.resources.projects import ProjectsClient
+from cove_sdk.resources.python_items import PythonItemsClient
 from cove_sdk.resources.users import UsersClient
 
 
@@ -23,6 +25,8 @@ class CoveClient:
         self.users = UsersClient(self._http)
         self.projects = ProjectsClient(self._http)
         self.key_values = KeyValuesClient(self._http)
+        self.json_items = JSONItemsClient(self._http)
+        self.python_items = PythonItemsClient(self._http)
         self.api_keys = APIKeysClient(self._http)
 
     def login(self, username: str, password: str) -> Token:

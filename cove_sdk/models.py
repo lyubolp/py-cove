@@ -36,6 +36,16 @@ class KeyValueItem(BaseModel):
     value: str
 
 
+class JSONItem(BaseModel):
+    key: str
+    value: dict[str, Any]
+
+
+class PythonItem(BaseModel):
+    key: str
+    value: str
+
+
 class StatusResponse(BaseModel):
     status: str | None = None
     error: str | None = None
