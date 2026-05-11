@@ -12,9 +12,11 @@ class PythonItemsClient:
         data = response.json()
         return [PythonItem.model_validate(item) for item in data]
 
-    def get(self, project_id: str, key: str) -> PythonItem:
+    def get(self, project_id: str, key: str) -> PythonItem | None:
         """GET /python_item/{project_id}/{key}"""
         response = self._http.request("GET", f"/python_item/{project_id}/{key}")
+        if response.status_code == 404:
+            return None
         return PythonItem.model_validate(response.json())
 
     def create(self, project_id: str, key: str, code: str) -> StatusResponse:

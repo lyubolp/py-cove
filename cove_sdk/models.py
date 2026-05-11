@@ -38,7 +38,7 @@ class KeyValueItem(BaseModel):
 
 class JSONItem(BaseModel):
     key: str
-    value: dict[str, Any]
+    json_value: dict[str, Any]
 
 
 class PythonItem(BaseModel):

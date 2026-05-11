@@ -11,9 +11,12 @@ class ProjectsClient:
         response = self._http.request("GET", "/project/")
         return [Project.model_validate(p) for p in response.json()]
 
-    def get(self, project_id: str) -> Project:
+    def get(self, project_id: str) -> Project | None:
         """GET /project/{project_id}"""
         response = self._http.request("GET", f"/project/{project_id}")
+
+        if response.status_code == 404:
+            return None
         return Project.model_validate(response.json())
 
     def create(self, name: str) -> StatusResponse:
