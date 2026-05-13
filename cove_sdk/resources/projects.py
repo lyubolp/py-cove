@@ -13,7 +13,7 @@ class ProjectsClient:
 
     def get(self, project_id: str) -> Project | None:
         """GET /project/{project_id}"""
-        response = self._http.request("GET", f"/project/{project_id}")
+        response = self._http.request("GET", f"/project/{project_id}", raise_for_404=False)
 
         if response.status_code == 404:
             return None

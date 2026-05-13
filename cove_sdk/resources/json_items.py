@@ -16,7 +16,7 @@ class JSONItemsClient:
 
     def get(self, project_id: str, key: str) -> JSONItem | None:
         """GET /json_item/{project_id}/{key}"""
-        response = self._http.request("GET", f"/json_item/{project_id}/{key}")
+        response = self._http.request("GET", f"/json_item/{project_id}/{key}", raise_for_404=False)
         if response.status_code == 404:
             return None
         return JSONItem.model_validate(response.json())

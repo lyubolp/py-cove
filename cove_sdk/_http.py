@@ -17,14 +17,19 @@ class HTTPClient:
         self.token: str | None = None
         self.api_key: str | None = None
 
-    def request(self, method: str, path: str, **kwargs) -> httpx.Response:
+    def request(
+        self, method: str, path: str, *, raise_for_404: bool = True, **kwargs
+    ) -> httpx.Response:
         headers = kwargs.pop("headers", {})
         if self.token:
             headers["Authorization"] = f"Bearer {self.token}"
         if self.api_key:
             headers["x-api-key"] = self.api_key
         response = self._client.request(method, path, headers=headers, **kwargs)
-        self._raise_for_status(response)
+        if raise_for_404 and response.status_code == 404:
+            self._raise_for_status(response)
+        elif response.status_code != 404:
+            self._raise_for_status(response)
         return response
 
     def _raise_for_status(self, response: httpx.Response) -> None:
