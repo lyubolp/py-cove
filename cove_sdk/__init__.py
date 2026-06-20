@@ -1,4 +1,4 @@
-from cove_sdk.client import CoveClient
+from cove_sdk.client import CoveClient, fetch_uri
 from cove_sdk.exceptions import (
     AccessDeniedError,
     AuthenticationError,
@@ -40,4 +40,5 @@ __all__ = [
     "NotFoundError",
     "ConflictError",
     "ValidationError",
+    "fetch_uri",
 ]

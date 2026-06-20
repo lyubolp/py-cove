@@ -1,5 +1,6 @@
 from cove_sdk._http import HTTPClient
-from cove_sdk.models import Token
+from cove_sdk._uri import ResourceType, parse_uri
+from cove_sdk.models import JSONItem, KeyValueItem, PythonItem, Token
 from cove_sdk.resources.api_keys import APIKeysClient
 from cove_sdk.resources.json_items import JSONItemsClient
 from cove_sdk.resources.key_values import KeyValuesClient
@@ -48,3 +49,18 @@ class CoveClient:
 
     def __exit__(self, *args):
         self.close()
+
+
+def fetch_uri(uri: str, api_key: str) -> JSONItem | KeyValueItem | PythonItem | None:
+    """Fetch a resource by its URI. The URI format is: cove://{host}/{resource_type}/{project_id}/{key}"""
+
+    host, resource, project_id, key = parse_uri(uri)
+
+    with CoveClient(base_url=f"http://{host}", api_key=api_key) as client:
+        match resource:
+            case ResourceType.JSON_ITEM:
+                return client.json_items.get(project_id, key)
+            case ResourceType.KEY_VALUE:
+                return client.key_values.get(project_id, key)
+            case ResourceType.PYTHON_ITEM:
+                return client.python_items.get(project_id, key)
