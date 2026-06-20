@@ -43,7 +43,7 @@ class JSONItem(BaseModel):
 
 class PythonItem(BaseModel):
     key: str
-    value: str
+    python_value: str
 
 
 class StatusResponse(BaseModel):
