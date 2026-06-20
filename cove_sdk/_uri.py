@@ -29,3 +29,9 @@ def parse_uri(uri: str) -> tuple[str, ResourceType, str, str]:
         raise URIParseError(f"Invalid resource type: {resource}")
 
     return netloc, ResourceType(resource), project_id, key
+
+
+def is_cove_uri(uri: str) -> bool:
+    split_result = urlsplit(uri)
+
+    return split_result.scheme == "cove"
