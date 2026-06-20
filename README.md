@@ -205,6 +205,20 @@ with CoveClient(base_url="http://localhost:8000") as client:
 
 ---
 
+### URI handling
+
+Structure of the URI: `cove://<host>/<resource>/<project_id>/<key>`
+
+
+```python
+from cove_sdk import fetch_uri
+
+uri = "cove://localhost:8001/python_item/eea1bf4b-04dd-45f0-9335-b714a0af5ccc/foo"
+result = fetch_uri(uri, "b416ecc2-b25d-44dd-989f-d6def600fb21")
+
+print(result)
+```
+
 ## Exception Reference
 
 | Exception | HTTP Status | Meaning |
