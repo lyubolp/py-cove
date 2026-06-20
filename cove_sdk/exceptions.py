@@ -37,3 +37,7 @@ class ValidationError(CoveAPIError):
     def __init__(self, status_code: int, detail: str, errors: list):
         super().__init__(status_code, detail)
         self.errors = errors  # list[ValidationErrorItem]
+
+
+class URIParseError(Exception):
+    pass

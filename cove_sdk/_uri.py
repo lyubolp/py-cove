@@ -1,15 +1,13 @@
 from enum import StrEnum
 from urllib.parse import urlsplit
 
+from cove_sdk.exceptions import URIParseError
+
 
 class ResourceType(StrEnum):
     JSON_ITEM = "json_item"
     KEY_VALUE = "key_value"
     PYTHON_ITEM = "python_item"
-
-
-class URIParseError(Exception):
-    pass
 
 
 def parse_uri(uri: str) -> tuple[str, ResourceType, str, str]:
