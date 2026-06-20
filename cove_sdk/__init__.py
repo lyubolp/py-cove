@@ -1,4 +1,5 @@
-from cove_sdk.client import CoveClient, fetch_uri, is_cove_uri
+from cove_sdk._uri import is_cove_uri
+from cove_sdk.client import CoveClient, fetch_uri
 from cove_sdk.exceptions import (
     AccessDeniedError,
     AuthenticationError,
