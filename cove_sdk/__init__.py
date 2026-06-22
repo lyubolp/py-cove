@@ -11,6 +11,7 @@ from cove_sdk.exceptions import (
 from cove_sdk.models import (
     APIKeyCreated,
     APIKeyPublic,
+    BaseItem,
     HTTPValidationError,
     JSONItem,
     KeyValueItem,
@@ -43,4 +44,5 @@ __all__ = [
     "ValidationError",
     "fetch_uri",
     "is_cove_uri",
+    "BaseItem",
 ]
