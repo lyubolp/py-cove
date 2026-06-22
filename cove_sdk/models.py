@@ -31,18 +31,19 @@ class APIKeyCreated(BaseModel):
     key: str
 
 
-class KeyValueItem(BaseModel):
+class BaseItem(BaseModel):
     key: str
+
+
+class KeyValueItem(BaseItem):
     value: str
 
 
-class JSONItem(BaseModel):
-    key: str
+class JSONItem(BaseItem):
     json_value: dict[str, Any]
 
 
-class PythonItem(BaseModel):
-    key: str
+class PythonItem(BaseItem):
     python_value: str
 
 
