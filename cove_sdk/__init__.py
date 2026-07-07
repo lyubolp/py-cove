@@ -1,4 +1,4 @@
-from cove_sdk._uri import is_cove_uri
+from cove_sdk._uri import ResourceType, build_uri, is_cove_uri
 from cove_sdk.client import CoveClient, fetch_uri
 from cove_sdk.exceptions import (
     AccessDeniedError,
@@ -13,9 +13,11 @@ from cove_sdk.models import (
     APIKeyPublic,
     BaseItem,
     HTTPValidationError,
+    ItemsDeleteResult,
     JSONItem,
     KeyValueItem,
     Project,
+    ProjectItems,
     PythonItem,
     StatusResponse,
     Token,
@@ -33,6 +35,8 @@ __all__ = [
     "JSONItem",
     "KeyValueItem",
     "PythonItem",
+    "ProjectItems",
+    "ItemsDeleteResult",
     "StatusResponse",
     "ValidationErrorItem",
     "HTTPValidationError",
@@ -44,5 +48,7 @@ __all__ = [
     "ValidationError",
     "fetch_uri",
     "is_cove_uri",
+    "build_uri",
+    "ResourceType",
     "BaseItem",
 ]

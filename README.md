@@ -93,6 +93,14 @@ with CoveClient(base_url="http://localhost:8000") as client:
     # Grant another user access
     client.projects.add_user(project_id, other_user_id)
 
+    # Fetch all key-value, JSON, and Python items in one call
+    items = client.projects.get_items(project_id)
+    print(items.key_value, items.json_items, items.python)
+
+    # Clear every item in the project (all three types)
+    result = client.projects.delete_items(project_id)
+    print(result.deleted_count)
+
     # Delete the project
     client.projects.delete(project_id)
 ```
@@ -217,6 +225,20 @@ uri = "cove://localhost:8001/python_item/eea1bf4b-04dd-45f0-9335-b714a0af5ccc/fo
 result = fetch_uri(uri, "b416ecc2-b25d-44dd-989f-d6def600fb21")
 
 print(result)
+```
+
+Build a URI from its parts with `build_uri` and the `ResourceType` enum:
+
+```python
+from cove_sdk import ResourceType, build_uri
+
+uri = build_uri(
+    host="localhost:8001",
+    resource=ResourceType.PYTHON_ITEM,
+    project_id="eea1bf4b-04dd-45f0-9335-b714a0af5ccc",
+    key="foo",
+)
+print(uri)  # "cove://localhost:8001/python_item/eea1bf4b-04dd-45f0-9335-b714a0af5ccc/foo"
 ```
 
 ## Exception Reference

@@ -1,6 +1,6 @@
 from typing import Any
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class Token(BaseModel):
@@ -51,6 +51,19 @@ class StatusResponse(BaseModel):
     status: str | None = None
     error: str | None = None
     project_id: str | None = None
+
+
+class ProjectItems(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
+    key_value: list[KeyValueItem] = Field(default_factory=list)
+    json_items: list[JSONItem] = Field(default_factory=list, alias="json")
+    python: list[PythonItem] = Field(default_factory=list)
+
+
+class ItemsDeleteResult(BaseModel):
+    status: str
+    deleted_count: int
 
 
 class ValidationErrorItem(BaseModel):

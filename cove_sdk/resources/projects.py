@@ -1,5 +1,5 @@
 from cove_sdk._http import HTTPClient
-from cove_sdk.models import Project, StatusResponse
+from cove_sdk.models import ItemsDeleteResult, Project, ProjectItems, StatusResponse
 
 
 class ProjectsClient:
@@ -56,3 +56,23 @@ class ProjectsClient:
             "DELETE", f"/project/{project_id}/access/{user_id}"
         )
         return StatusResponse.model_validate(response.json())
+
+    def get_items(self, project_id: str) -> ProjectItems | None:
+        """GET /project/{project_id}/items
+
+        Returns all key-value, JSON, and Python items in the project, grouped by type.
+        """
+        response = self._http.request(
+            "GET", f"/project/{project_id}/items", raise_for_404=False
+        )
+        if response.status_code == 404:
+            return None
+        return ProjectItems.model_validate(response.json())
+
+    def delete_items(self, project_id: str) -> ItemsDeleteResult:
+        """DELETE /project/{project_id}/items
+
+        Clears every key-value, JSON, and Python item in the project.
+        """
+        response = self._http.request("DELETE", f"/project/{project_id}/items")
+        return ItemsDeleteResult.model_validate(response.json())

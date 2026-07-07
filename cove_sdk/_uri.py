@@ -35,3 +35,8 @@ def is_cove_uri(uri: str) -> bool:
     split_result = urlsplit(uri)
 
     return split_result.scheme == "cove"
+
+
+def build_uri(host: str, resource: ResourceType, project_id: str, key: str) -> str:
+    """Build a Cove URI: cove://<host>/<resource>/<project_id>/<key>"""
+    return f"cove://{host}/{resource.value}/{project_id}/{key}"
